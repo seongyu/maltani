@@ -1,5 +1,4 @@
 # maltani
-# created by LeonKim
 Samsung SmartConnect &amp; Maltani Project UI
 
 INIT FROM index.html
@@ -15,3 +14,5 @@ Added Library
 
 Font
 - Roboto
+
+@ created by LeonKim
