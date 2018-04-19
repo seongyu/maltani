@@ -1,0 +1,145 @@
+<html>
+  <head>
+    <title>Maltani Project</title>
+    <meta name="viewport" content="width=1440, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-slider.css">
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+  </head>
+  <body class="body">
+
+
+    <!-- top area -->
+    <div class="header">
+      <div class="left">
+        <img src="asset/previous.svg" class="previous_btn"/>
+      </div>
+      <div class="center">
+        <div class="main_text roboto-condensed-bold">IoT LED Light</div>
+        <div class="sub_text roboto-condensed-regular">Home - Living room</div>
+      </div>
+      <div class="right">
+        <img src="asset/more.svg" class="more_btn" onclick="UI.optionBox(true)"/>
+      </div>
+    </div>
+
+
+    <!-- hero card area -->
+    <div class="hero">
+      <div id="mode_btn" class="mode">
+        <div class="text roboto-condensed-bold" onclick="selectBox('mode')">NORMAL</div>
+        <img src="asset/arrow_down.svg" class="arrow"/>
+      </div>
+      <div id="power_btn" class="power_on" onclick="UI.powerCtrl()">
+        <img class="btn" src="asset/power_on.png"/>
+        <div class="text roboto-condensed-light">On</div>
+      </div>
+    </div>
+
+
+    <!-- function card area -->
+    <div>
+
+
+      <!-- main light -->
+      <div id="main_light_fn" class="card type_s">
+        <img class="cicon" src="asset/light.svg"/>
+        <div class="citem roboto-regular">
+          <div class="main_text">Main Light</div>
+          <div class="sub_text">On</div>
+        </div>
+        <div class="caction">
+          <div class="switch">
+            <label>
+                <input id="main_light" type="checkbox" checked onchange="UI.set.main_light(this)">
+                <span class="da_sw"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- brightness -->
+      <div id="brightness" class="card type_l">
+        <div class="dimmed-overlay"></div>
+        <div class="title">Brightness</div>
+        <img class="cicon" src="asset/brightness.svg"/>
+        <div class="citem slide_block">
+          <div id="bright-i" class="info" onclick="FN.open_dialog('bright')">46%</div>
+          <input id="bright" data-slider-id='bright-s' type="text" data-slider-min="10" data-slider-max="130" data-slider-step="10" data-slider-value="60"/>
+        </div>
+      </div>
+
+
+      <!-- color temperature -->
+      <div id="color_temperature" class="card type_l">
+        <div class="dimmed-overlay"></div>
+        <div class="title">Color Temperature</div>
+        <img class="cicon" src="asset/temp.svg"/>
+        <div class="citem slide_block">
+          <div id="temp-i" class="info" onclick="FN.open_dialog('temp')">4820K</div>
+          <input id="temp" data-slider-id='temp-s' type="text" data-slider-min="1" data-slider-max="6" data-slider-step="1" data-slider-value="3"/>
+        </div>
+      </div>
+
+
+      <!-- fade out -->
+      <div id="timer" class="card type_s">
+        <img class="cicon" src="asset/timer.svg"/>
+        <div class="citem roboto-regular">
+          <div class="main_text">Fade Out Timer</div>
+          <div class="sub_text">Off</div>
+        </div>
+        <img class="caction btn" src="asset/next.svg" onclick="selectBox('fade_out')"/>
+      </div>
+
+      <!-- mood lamp -->
+      <div id="mood_lamp_fn" class="card type_s">
+        <img class="cicon" src="asset/light.svg"/>
+        <div class="citem roboto-regular">
+          <div class="main_text">Mood Lamp</div>
+          <div class="sub_text">On</div>
+        </div>
+        <div class="caction">
+          <div class="switch">
+            <label>
+                <input id="mood_lamp" type="checkbox" checked onchange="UI.set.mood_lamp(this)">
+                <span class="da_sw"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- user setting -->
+      <div id="mode" class="card type_s">
+        <img class="cicon" src="asset/setting.svg"/>
+        <div class="citem roboto-regular">
+          <div class="main_text" style="margin-top:98px">User Mode Setting</div>
+        </div>
+        <img class="caction btn" src="asset/next.svg" onclick="page_move()"/>
+      </div>
+
+    </div>
+
+    <div class="overlay" onclick="UI.closeBox()"></div>
+    <div id="loading" class="loading">
+      <img src="asset/progress.png"/>
+    </div>
+    <div class="overlay-white" onclick="UI.optionBox(false)"></div>
+    <div id="dialogBox"></div>
+    <div id="selectBox"></div>
+    <div id="optionBox"></div>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-slider.min.js"></script>
+    <script type="text/javascript" src="js/common_script.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script>
+      window.onload = () => {
+        $('body').css('visibility','visible')
+      }
+
+      var page_move = () => {
+        location.href = 'list.html'
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>Maltani Project</title>
+    <meta name="viewport" content="width=1440, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+  </head>
+  <body class="body">
+    <div class="header">
+      <div class="left">
+        <img src="asset/previous.svg" class="previous_btn" onclick="page_move('back')"/>
+      </div>
+      <div class="center">
+        <div class="main_single_text roboto-condensed-bold">USER MODE SETTING</div>
+      </div>
+      <div class="right">
+        <div class="add_btn" onclick="page_move()">ADD</div>
+      </div>
+    </div>
+    
+    <div class="card">
+    </div>
+    
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/common_script.js"></script>
+    <script>
+      window.onload = () => {
+        UI._listTpl(user_define_sample);
+        $('body').css('visibility','visible')
+      }
+
+      var page_move = (wh) => {
+        if(wh=='back'){
+          location.href='index.html'
+        }else{
+
+          if(wh || wh==0){
+            sessionStorage.setItem('itemIdx',wh);
+          }else{
+            sessionStorage.removeItem('itemIdx');
+          }
+
+          location.href='form.html'
+        }
+      }
+    </script>
+  </body>
+</html>

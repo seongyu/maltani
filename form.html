@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>Maltani Project</title>
+    <meta name="viewport" content="width=1440, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-slider.css">
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+  </head>
+  <body class="body">
+    <div class="header">
+      <div class="twin_btn" onclick="page_move('back')">CANCEL</div>
+      <div class="twin_btn" onclick="page_move('save')">SAVE</div>
+    </div>
+    <div>
+
+      <div class="card text_area">
+        <div class="title">Mode Name</div>
+        <input id="name" type="text" placeholder="Title of mode(upto 13 characters)" maxlength="13"/>
+        <div class="err_msg">Exceeded Maximum of characters</div>
+      </div>
+
+      <div id="brightness" class="card type_l form">
+        <div class="dimmed-overlay"></div>
+        <div class="title">Brightness</div>
+        <img class="cicon" src="asset/brightness.svg"/>
+        <div class="citem slide_block">
+          <div id="bright-i" class="info" onclick="FN.open_dialog('bright')">46%</div>
+          <input id="bright" data-slider-id='bright-s' type="text" data-slider-min="10" data-slider-max="130" data-slider-step="10" data-slider-value="60"/>
+        </div>
+      </div>
+
+      <!-- color temperature -->
+      <div id="color_temperature" class="card type_l form">
+        <div class="dimmed-overlay"></div>
+        <div class="title">Color Temperature</div>
+        <img class="cicon" src="asset/temp.svg"/>
+        <div class="citem slide_block">
+          <div id="temp-i" class="info" onclick="FN.open_dialog('temp')">4820K</div>
+          <input id="temp" data-slider-id='temp-s' type="text" data-slider-min="1" data-slider-max="6" data-slider-step="1" data-slider-value="3"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="delete_btn">DELETE</div>
+    
+    <div class="overlay" onclick="UI.closeBox()"></div>
+
+    <div id="loading" class="loading">
+      <img src="asset/progress.png"/>
+    </div>
+    
+    <div id="dialogBox"></div>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-slider.min.js"></script>
+    <script type="text/javascript" src="js/common_script.js"></script>
+    <script type="text/javascript" src="js/form.js"></script>
+    <script>
+
+      $('#name').on('keydown',(me) => {
+        if(me.target.value.length>=13&&me.key!='Backspace'){
+          $('.text_area').addClass('text_error');
+          $('.err_msg').css('visibility','visible');
+        }else{
+          $('.text_area').removeClass('text_error');
+          $('.err_msg').css('visibility','hidden');
+        }
+      })
+      
+    </script>
+  </body>
+</html>

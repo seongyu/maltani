@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>Maltani Project</title>
+    <meta name="viewport" content="width=1440, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+  </head>
+  <body class="body">
+    <div class="header">
+      <div class="left">
+        <img src="asset/previous.svg" class="previous_btn" onclick="page_move()"/>
+      </div>
+      <div class="center">
+        <div class="main_single_text roboto-condensed-bold">INFORMATION</div>
+      </div>
+      <div class="right">
+      </div>
+    </div>
+    
+    <div class="content">
+      <img src="asset/light.svg" class="info_light"/>
+      <div class="roboto-condensed-bold">IoT LED Light</div>
+      <div style="display: inline-block;line-height: 1.2;" >
+        <div class="roboto-regular" style="color:#979797;font-size:64px">
+          Device Plugin Version Info<br>
+          version DA201804-1.0.0<br>
+          Controller Version<br>
+          version DA201804-1.0.0
+        </div>
+      </div>
+      <div class="update_btn roboto-condensed-regular">CONTROLLER UPDATE</div>
+
+    </div>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/ui_script.js"></script>
+    <script>
+      window.onload = () => {
+        $('body').css('visibility','visible')
+      }
+
+      var page_move = () => {
+        location.href = 'index.html'
+      }
+    </script>
+  </body>
+</html>
