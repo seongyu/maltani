@@ -3,6 +3,7 @@ set_val.bright = 46;
 set_val.temp = 4820;
 
 var idx = sessionStorage.getItem('itemIdx');
+
 if(idx){
   idx = parseInt(idx)
   var item = user_define_sample[idx];
@@ -24,15 +25,29 @@ var page_move = (wh) => {
     if(!name||name==''){
       UI.toast('Mode name not defined\nSet mode name and try again, please')
       return null;
-    }
-    user_define_sample.push({
+    };
+
+    var item = {
       name : name,
       bright : set_val.bright,
       temp : set_val.temp
-    })
+    };
+
+    if(idx||idx==0){
+      user_define_sample[idx] = item
+    }else{
+      user_define_sample.push(item)
+    }
     
     sessionStorage.setItem('UDM',JSON.stringify(user_define_sample));
     UI.toast('Successfully saved!',() => {
+      location.href = 'list.html';
+    })
+  }else if(wh=='del'){
+    user_define_sample.splice(idx,1);
+
+    sessionStorage.setItem('UDM',JSON.stringify(user_define_sample));
+    UI.toast('Successfully deleted!',() => {
       location.href = 'list.html';
     })
   }

@@ -188,14 +188,13 @@ UI.dialogBox = (act,param) => {
 
 UI.selectBox = (act,param) => {
   if(set_val.dimmed) return;
-
+  if(param.type=='fade_out'&&set_val.main_dimmed) return;
   if(act==true){
     var top = -40;
     if(param.type != 'fade_out'){
       top = 360;
       $('#mode_btn img').attr('src','asset/arrow_up.svg');
     }
-    if(set_val.main_dimmed) return;
 
     $('#selectBox').html(UI._selectTpl(param));
 
@@ -221,7 +220,7 @@ UI.set = {
   main_light : (value) => {
     if(set_val.dimmed) return;
 
-    var ml_status = document.getElementById(value.id).checked;
+    var ml_status = value ? document.getElementById(value.id).checked : false;
     if(ml_status){
       $('#main_light_fn .sub_text').css('color','#3695dd').html('On')
     }else{
@@ -232,7 +231,7 @@ UI.set = {
   },
   mood_lamp : (value) => {
     if(set_val.dimmed) return;
-    var ml_status = document.getElementById(value.id).checked;
+    var ml_status = value ? document.getElementById(value.id).checked : false;
     if(ml_status){
       $('#mood_lamp_fn .sub_text').css('color','#3695dd').html('On')
     }else{
@@ -273,12 +272,13 @@ UI.set = {
 
     val = parseInt(val)? val + ' minutes' : val;
     $('#timer .sub_text').text(val);
+    $('#mode_btn > .text').text('NORMAL');
 
     UI.closeBox();
   },
   mode : (value) => {
     if(set_val.dimmed) return;
-
+    UI._setMainLightDimmed(false);
     $($('.card .list')[value]).css('color','#3695dd');
     var item = user_define_sample[value];
     UI.set.bright(item.bright);
@@ -326,14 +326,19 @@ UI._setPowerDimmed = (value) => {
     $('#mood_lamp').attr('disabled',true);
     $('.dimmed-overlay').css('display','block');
 
+    $('#main_light_fn .sub_text').css('color','#979797').html('Off')
+    $('#mood_lamp_fn .sub_text').css('color','#979797').html('Off')
     $('#mode_btn').addClass('dimmed-btn');
     $('#main_light_fn').addClass('dimmed');
     $('#brightness').addClass('dimmed');
     $('#color_temperature').addClass('dimmed');
     $('#timer').addClass('dimmed');
     $('#mood_lamp_fn').addClass('dimmed');
+
+    set_val.main_dimmed = true;
   }else{
     document.getElementById("main_light").checked = true;
+    $('#main_light_fn .sub_text').css('color','#3695dd').html('On')
 
     $('#main_light').attr('disabled',false);
     $('#mood_lamp').attr('disabled',false);
@@ -345,18 +350,26 @@ UI._setPowerDimmed = (value) => {
     $('#color_temperature').removeClass('dimmed');
     $('#timer').removeClass('dimmed');
     $('#mood_lamp_fn').removeClass('dimmed');
+
+    set_val.main_dimmed = false;
   }
 }
 
 UI._setMainLightDimmed = (value) => {
   if(value){
+    document.getElementById("main_light").checked = false;
+
     $('.dimmed-overlay').css('display','block');
+    $('#main_light_fn .sub_text').css('color','#979797').html('Off')
 
     $('#brightness').addClass('dimmed');
     $('#color_temperature').addClass('dimmed');
     $('#timer').addClass('dimmed');
   }else{
+    document.getElementById("main_light").checked = true;
+
     $('.dimmed-overlay').css('display','none');
+    $('#main_light_fn .sub_text').css('color','#3695dd').html('On')
 
     $('#brightness').removeClass('dimmed');
     $('#color_temperature').removeClass('dimmed');
@@ -497,17 +510,17 @@ UI._setDialogAction = () => {
 }
 
 UI.toast = (msg,fn) => {
-  var toastTpl = ['<div class="toast">',msg,'</div>'].join("");
+  var toastTpl = ['<div class="toast_overlay"><div class="toast">',msg,'</div></div>'].join("");
   $('body').append(toastTpl);
-  $('.toast').fadeIn();
+  $('.toast_overlay').fadeIn();
   setTimeout(()=>{
-    $('.toast').fadeOut(()=>{
-      $('.toast').remove();
+    $('.toast_overlay').fadeOut(()=>{
+      $('.toast_overlay').remove();
     })
     if(fn){
       fn();
     }
-  },1500)
+  },1000)
 }
 
 window.onload = () => {
